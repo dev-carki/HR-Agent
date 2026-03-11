@@ -1,13 +1,7 @@
-from typing import Annotated
-
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr
 
 from backend.models.base import BaseResponse
-
-PhoneNumber = Annotated[
-    str,
-    Field(pattern=r"^010-\d{4}-\d{4}$")
-]
+from common.types import PhoneNumber
 
 # ── Company ───────────────────────────────────────────────────────────────────
 class CompanyBase(BaseModel):
