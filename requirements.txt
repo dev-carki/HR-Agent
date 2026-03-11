@@ -1,0 +1,37 @@
+# Web Framework
+fastapi==0.115.4
+uvicorn[standard]==0.32.1
+python-multipart==0.0.12
+aiomysql==0.2.0
+
+# AI / LLM / Agent
+langchain==0.3.7
+langchain-openai==0.2.9
+langchain-community==0.3.7
+langgraph==0.2.53
+langsmith==0.1.147
+openai==1.55.3
+
+# ML / Embedding
+sentence-transformers==3.3.1
+torch==2.5.1
+transformers==4.47.0
+
+# Vector DB
+faiss-cpu==1.9.0
+
+# Document Processing
+pymupdf==1.24.13
+pdfplumber==0.11.4
+
+# Database
+sqlalchemy==2.0.35
+pymysql==1.1.1
+
+# UI
+streamlit==1.40.2
+
+# Utility
+python-dotenv==1.0.1
+pydantic==2.10.3
+requests==2.32.3
