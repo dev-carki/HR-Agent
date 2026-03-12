@@ -8,6 +8,7 @@ class GraphState(TypedDict):
     company_info: CompanyInfo
     
     # ── Layer 2 - Parsed Resume (Parser 노드가 채움) ───────────────────────────────────
+    raw_pdf_text: str | None
     resume_data: ResumeData | None
     photo_path: str | None
     

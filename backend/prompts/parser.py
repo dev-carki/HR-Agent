@@ -8,7 +8,6 @@ PARSER_SYSTEM_PROMPT = """
 - phone: 전화번호 (string)
 - skills: 보유 기술 목록 (list of string)
 - career_history: 경력 사항 전체 (string, 없으면 빈 문자열)
-- education: 학력 사항 전체 (string)
 - self_introduction: 자기소개서 전체 (string, 없으면 빈 문자열)
 
 정보를 찾을 수 없는 필드는 빈 문자열("") 또는 빈 배열([])로 채우세요.

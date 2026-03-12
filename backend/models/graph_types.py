@@ -15,5 +15,4 @@ class ResumeData(TypedDict):
     phone: str
     skills: list[str]
     career_history: str
-    education: str
     self_introduction: str
