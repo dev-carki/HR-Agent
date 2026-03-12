@@ -23,6 +23,7 @@ faiss-cpu==1.9.0
 # Document Processing
 pymupdf==1.24.13
 pdfplumber==0.11.4
+Pillow==11.1.0
 
 # Database
 sqlalchemy==2.0.35

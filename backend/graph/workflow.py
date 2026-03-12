@@ -1,27 +1,15 @@
 from langgraph.graph import StateGraph, START, END
 
 from backend.graph.state import GraphState
-
-def resume_parser_node(state: GraphState) -> dict:
-    return {}
-
-def photo_analyze_node(state: GraphState) -> dict:
-    return {}
-
-def personal_info_analyze_node(state: GraphState) -> dict:
-    return {}
-
-def skill_match_analyze_node(state: GraphState) -> dict:
-    return {}
-
-def self_intro_analyze_node(state: GraphState) -> dict:
-    return {}
-
-def career_analyze_node(state: GraphState) -> dict:
-    return {}
-
-def aggregator_node(state: GraphState) -> dict:
-    return {}
+from backend.graph.nodes import (
+    resume_parser_node, 
+    photo_analyze_node,
+    aggregator_node,
+    career_analyze_node,
+    personal_info_analyze_node,
+    self_intro_analyze_node,
+    skill_match_analyze_node
+)
 
 def build_graph():
     builder = StateGraph(GraphState)

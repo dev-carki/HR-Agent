@@ -1,28 +1,15 @@
 from typing_extensions import TypedDict
 
-class CompanyInfo(TypedDict):
-    name: str
-    address: str
-    required_skills: list[str]
-    jd_text: str
-    
-class ResumeData(TypedDict):
-    name: str
-    email: str
-    phone: str
-    skills: list[str]
-    career_history: str
-    education: str
-    self_introduction: str
-    photo_path: str
+from backend.models.graph_types import CompanyInfo, ResumeData
 
 class GraphState(TypedDict):
     # ── Layer 1 - Input (워크플로우 시작 시 주입) ────────────────────────────────────────
-    pdf_path: str | None
+    pdf_path: str
     company_info: CompanyInfo
     
     # ── Layer 2 - Parsed Resume (Parser 노드가 채움) ───────────────────────────────────
-    resume_data: ResumeData
+    resume_data: ResumeData | None
+    photo_path: str | None
     
     # ── Layer 3 - Agent Results (각 병렬 에이전트가 채움) ─────────────────────────────────
     photo_result: dict | None

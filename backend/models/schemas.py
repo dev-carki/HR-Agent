@@ -58,3 +58,4 @@ class AnalysisResultCreate(AnalysisResultBase):
 
 class AnalysisResultResponse(AnalysisResultBase, BaseResponse):
     pass
+
