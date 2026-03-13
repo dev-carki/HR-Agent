@@ -3,7 +3,7 @@ PARSER_SYSTEM_PROMPT = """
 주어진 이력서 텍스트에서 아래 필드를 추출해 반드시 JSON 형식으로만 응답하세요.
 
 추출할 필드:
-- name: 지원자 이름 (string)
+- name: 지원자 이름 — 이력서에 적힌 원문 그대로 추출하세요. 번역하거나 영문으로 변환하지 마세요. (string)
 - email: 이메일 주소 (string)
 - phone: 전화번호 (string)
 - skills: 보유 기술 목록 (list of string)

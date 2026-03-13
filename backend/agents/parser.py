@@ -4,7 +4,7 @@ import fitz
 from PIL import Image
 
 from backend.llm.openai import OpenAILLM
-from backend.models.graph_types import ResumeData
+from backend.graph.types import ResumeData
 from backend.prompts.parser import PARSER_SYSTEM_PROMPT
 
 # (텍스트, 사진경로)

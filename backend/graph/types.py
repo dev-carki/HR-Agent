@@ -9,6 +9,7 @@ class CompanyInfo(TypedDict):
     required_skills: list[str]
     jd_text: str
 
+
 class ResumeData(TypedDict):
     name: str
     email: str

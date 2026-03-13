@@ -1,6 +1,6 @@
 from typing_extensions import TypedDict
 
-from backend.models.graph_types import CompanyInfo, ResumeData
+from backend.graph.types import CompanyInfo, ResumeData
 
 class GraphState(TypedDict):
     # ── Layer 1 - Input (워크플로우 시작 시 주입) ────────────────────────────────────────
