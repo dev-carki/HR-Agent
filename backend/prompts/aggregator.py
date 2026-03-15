@@ -14,7 +14,7 @@ AGGREGATOR_SYSTEM_PROMPT = """
   - 미추천: overall_score 39점 이하, 직무 요건과 현저히 불일치
 
 반환할 JSON 필드 (점수는 포함하지 마세요. 점수는 시스템에서 별도 관리합니다):
-- candidate_name: 지원자 이름 (string)
+- candidate_name: 지원자 이름 — 이력서에 기재된 원문 그대로 사용 (string, 예: "김철수")
 - applied_position: 지원 포지션 (string)
 - strengths: 지원자의 종합 강점 목록 (list of string)
 - concerns: 종합 우려사항 목록 (list of string, 없으면 빈 배열)

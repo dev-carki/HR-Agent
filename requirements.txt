@@ -28,6 +28,7 @@ Pillow==11.1.0
 # Database
 sqlalchemy==2.0.35
 pymysql==1.1.1
+greenlet==3.3.2
 
 # UI
 streamlit==1.40.2

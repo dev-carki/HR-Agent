@@ -11,7 +11,8 @@ PERSONAL_INFO_ANALYZE_SYSTEM_PROMPT = """
 - 정보가 없는 문자열 필드는 빈 문자열("")로 반환하세요.
 
 반환할 JSON 필드:
-- contact: 연락처 요약 — 전화번호, 이메일 등 (string)
+- phone: 전화번호 (string, 예: "010-1234-5678", 없으면 빈 문자열)
+- email: 이메일 주소 (string, 예: "user@example.com", 없으면 빈 문자열)
 - location: 거주지 또는 주소 (string)
 - github_url: 깃허브 주소 (string, 없으면 빈 문자열)
 - tagline: 지원자의 한 줄 소개 문구 (string, 없으면 빈 문자열)
