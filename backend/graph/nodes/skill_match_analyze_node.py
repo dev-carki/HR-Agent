@@ -1,9 +1,12 @@
 import re
+import json
+
+from langchain_core.messages import HumanMessage, SystemMessage, ToolMessage
 
 from backend.graph.state import GraphState
 from backend.llm.openai import OpenAILLM
 from backend.prompts.skill_match import SKILL_MATCH_SYSTEM_PROMPT
-
+from backend.tools.github_api import get_github_profile
 
 def _normalize(skill: str) -> str:
     """하이픈·공백·언더스코어 제거 후 소문자 변환"""
@@ -11,6 +14,7 @@ def _normalize(skill: str) -> str:
 
 
 def skill_match_analyze_node(state: GraphState) -> dict:
+    github_url = state["resume_data"]["github_url"]
     applicant_skills_list = state["resume_data"]["skills"]
     company_required_skills = state["company_info"]["required_skills"]
 
@@ -20,7 +24,36 @@ def skill_match_analyze_node(state: GraphState) -> dict:
     """
 
     llm = OpenAILLM()
-    skill_match_result = llm.chat_json(content=content, system_prompt=SKILL_MATCH_SYSTEM_PROMPT)
+    
+    if github_url:
+        chat_model = llm.as_chat_model()
+        llm_with_tools = chat_model.bind_tools([get_github_profile])
+        
+        messages = [
+            SystemMessage(content=SKILL_MATCH_SYSTEM_PROMPT),
+            HumanMessage(content=f"""
+            지원자 보유 기술: {applicant_skills_list}
+            회사 요구 기술: {company_required_skills}
+            지원자 GitHub: {github_url}
+            """)
+        ]
+        
+        while True:
+            response = llm_with_tools.invoke(messages)
+            messages.append(response)
+            
+            if not response.tool_calls:
+                break
+            
+            for tool_call in response.tool_calls:
+                tool_result = get_github_profile.invoke(tool_call["args"])
+                messages.append(ToolMessage(
+                    content=str(tool_result),
+                    tool_call_id=tool_call["id"]
+                ))
+        skill_match_result = json.loads(response.content)
+    else:
+        skill_match_result = llm.chat_json(content=content, system_prompt=SKILL_MATCH_SYSTEM_PROMPT)
 
     # ── 후처리: LLM 결과의 이름 불일치 보정 ──────────────────────────────────────
     # required_skills 정규화 맵 {정규화값: 원본 이름}

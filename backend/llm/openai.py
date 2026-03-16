@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any
 
 from openai import OpenAI
+from langchain_openai import ChatOpenAI
 
 from backend.config import get_settings
 
@@ -74,3 +75,10 @@ class OpenAILLM:
         )
 
         return json.loads(response.choices[0].message.content)
+
+    def as_chat_model(self) -> ChatOpenAI:
+        return ChatOpenAI(
+            model=self.model,
+            temperature=self.temperature,
+            api_key=self.client.api_key
+        )

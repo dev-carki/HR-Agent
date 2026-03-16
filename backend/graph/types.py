@@ -14,6 +14,7 @@ class ResumeData(TypedDict):
     name: str
     email: str
     phone: str
+    github_url: str
     skills: list[str]
     career_history: str
     self_introduction: str
