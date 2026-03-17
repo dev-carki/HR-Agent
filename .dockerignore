@@ -1,0 +1,21 @@
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Git
+.git/
+.gitignore
+
+# 환경변수
+.env
+
+notebook/
+tests/
+*.ipynb
+
+uploads/
+
+.DS_Store
