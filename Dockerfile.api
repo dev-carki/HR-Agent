@@ -15,6 +15,7 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir \
     $(grep -v -E '^(streamlit|ipykernel|#|$)' requirements.txt | grep -v torch)
 
+COPY pyproject.toml .
 COPY backend/ ./backend/
 COPY common/ ./common/
 
