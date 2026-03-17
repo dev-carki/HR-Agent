@@ -1,0 +1,70 @@
+services:
+
+  # MySQL 데이터베이스
+  mysql:
+    image: mysql:8.0                      
+    container_name: hr-agent-mysql        
+    restart: unless-stopped               
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - hr-agent-network                  
+    healthcheck:                          
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s                      
+      timeout: 5s                        
+      retries: 5                         
+
+  # FastAPI API 서버
+  api:
+    image: owenkr/hr-agent-api:latest
+    container_name: hr-agent-api
+    restart: unless-stopped
+    environment:
+      MYSQL_HOST: mysql          
+      MYSQL_PORT: 3306           
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      LANGSMITH_API_KEY: ${LANGSMITH_API_KEY}
+      LANGSMITH_TRACING: ${LANGSMITH_TRACING}
+      LANGSMITH_ENDPOINT: ${LANGSMITH_ENDPOINT}
+      LANGSMITH_PROJECT: ${LANGSMITH_PROJECT}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./uploads:/app/uploads
+    networks:
+      - hr-agent-network
+    depends_on:
+      mysql:
+        condition: service_healthy        
+
+  # Streamlit UI 서버
+  streamlit:
+    image: owenkr/hr-agent-streamlit:latest
+    container_name: hr-agent-streamlit
+    restart: unless-stopped
+    environment:
+      API_BASE_URL: http://api:8000
+    ports:
+      - "8501:8501"
+    networks:
+      - hr-agent-network
+    depends_on:
+      - api                               
+
+networks:
+  hr-agent-network:
+    driver: bridge                        
+
+volumes:
+  mysql_data:
