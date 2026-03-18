@@ -51,6 +51,28 @@ def render_results(result: dict):
 
     st.divider()
 
+    # ── 지원자 주소 + 통근 거리 ───────────────────────────────────────────────────
+    personal_info = result.get("personal_info_result", {})
+    if personal_info:
+        location = personal_info.get("location", "")
+        distance_info = personal_info.get("distance_info")
+
+        if location:
+            st.info(f"📍 지원자는 **{location}** 에 거주하는 것으로 확인됩니다.")
+
+        if distance_info and not distance_info.get("error"):
+            col_dist, col_car, col_transit = st.columns(3)
+            with col_dist:
+                st.metric("직선거리", f"{distance_info['distance_km']} km")
+            with col_car:
+                st.metric("차량 이동", distance_info["car_time"])
+            with col_transit:
+                st.metric("대중교통", distance_info["transit_time"])
+        elif distance_info and distance_info.get("error"):
+            st.caption(f"거리 정보 조회 실패: {distance_info['error']}")
+
+    st.divider()
+
     # ── 상세 분석 탭 ──────────────────────────────────────────────────────────────
     tab_skill, tab_career, tab_photo = st.tabs(["기술 분석", "경력 분석", "사진 분석"])
 

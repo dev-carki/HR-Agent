@@ -1,7 +1,8 @@
 import requests
 import streamlit as st
+import os
 
-API_URL = "http://localhost:8000/api/v1/resume/analyze"
+API_URL = os.getenv("API_BASE_URL", "http://localhost:8000") + "/api/v1/resume/analyze"
 
 
 def render_upload(company_info: dict):
