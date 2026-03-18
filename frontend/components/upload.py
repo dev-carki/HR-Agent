@@ -1,6 +1,7 @@
 import requests
-import streamlit as st
 import os
+
+import streamlit as st
 
 API_URL = os.getenv("API_BASE_URL", "http://localhost:8000") + "/api/v1/resume/analyze"
 

@@ -123,6 +123,7 @@ async def analyze(
             career_result=result["career_result"],
             self_intro_result=result["self_intro_result"],
             personal_info_result=result["personal_info_result"],
+            photo_path=result["photo_path"],
             photo_result=result["photo_result"],
         ),
     )

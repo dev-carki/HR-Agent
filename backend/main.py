@@ -2,6 +2,7 @@ from fastapi import FastAPI
 
 from backend.api.routes.resume import router as resume_router
 from backend.api.routes.analysis import router as analysis_router
+from backend.api.routes.images import router as image_router
 from backend.services.database import Base, engine
 from backend.api.middleware.exception_handler import global_exception_hanlder
 
@@ -18,6 +19,7 @@ app = FastAPI(
 
 app.include_router(resume_router, prefix="/api/v1")
 app.include_router(analysis_router, prefix="/api/v1")
+app.include_router(image_router, prefix="/api/v1")
 app.add_exception_handler(Exception, global_exception_hanlder)
 
 

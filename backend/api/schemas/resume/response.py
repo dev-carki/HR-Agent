@@ -14,4 +14,5 @@ class AnalyzeResponse(BaseModel):
     career_result: dict
     self_intro_result: dict
     personal_info_result: dict
+    photo_path: str
     photo_result: dict

@@ -83,4 +83,4 @@ def render_results(result: dict):
         render_career_card(result.get("career_result", {}))
 
     with tab_photo:
-        render_photo_card(result.get("photo_result", {}))
+        render_photo_card(result.get("photo_result", {}), photo_path=result.get("photo_path"))
